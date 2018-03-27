@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <!-- Meta tags -->
+  <meta charset="utf-8" />
+  <meta name="author" content="???" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Title -->
+  <title>Projet Photo</title>
+
+  <!-- Css Styles -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <!-- Header -->
+  <div class="page-header container" id="test">
+    <h1>Projet <small>AJAX</small></h1>
+  </div>
+
+  <!-- Errors div -->
+
+  <div id="errors" class="container">
+
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Authentification</h3>
+      </div>
+      <div id="authentification" class="container">
+        <form>
+          <div class="input-group">
+            <span class="input-group-addon">Login</span>
+            <input type="text" class="panel-body" id="login" placeholder="Entrez votre login" autofocus>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">Password</span>
+            <input type="text" class="panel-body" id="password" placeholder="Entrez votre password" autofocus>
+          </div>
+
+
+          <button type="submit" class="btn btn-success pull-left" id="authentification-send">
+            <span class="glyphicon glyphicon-send"></span> Envoyer
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--=======================================================================-->
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--=======================================================================-->
+
+
+
+
+  <div class="col-md-8">
+
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Photo</h3>
+      </div>
+      <div id="thumbnails" class="panel-body">
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Photo</h3>
+      </div>
+      <div id="photo2" class="panel-body">
+
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading" >
+          <h3 class="panel-title">chat</h3>
+        </div>
+        <div id="chat" class="panel-body">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-2">
+      <div class="panel-heading" >
+        <h3 class="panel-title">comments</h3>
+      </div>
+      <div id="comments" class="panel-body">
+
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Commentaire add</h3>
+      </div>
+      <div id="comments-add" class="panel-body">
+      </div>
+    </div>
+
+
+
+    <!-- Timestamp div -->
+
+
+
+
+    <!-- Js Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/ajax.js"></script>
+    <script src="js/loading.js"></script>
+  </body>
+  </html>

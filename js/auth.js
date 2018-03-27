@@ -2,7 +2,7 @@
 
 function authentication() {
     $('#authentication-send').off('click').click(validateLogin);
-    $("#authentication").show();
+    $("#authentification").show();
 }
 
 function validateLogin(event) {
@@ -31,7 +31,8 @@ function validateLogin(event) {
         switch (xhr.status) {
             case 200:
                 Cookies.set('token', xhr.responseText);
-                $("#authentication").hide();
+                $("#authentification").hide();
+                console.log("auth ok");
                 $('#infos').html('Authentification OK');
                 break;
             default:

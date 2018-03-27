@@ -38,7 +38,7 @@
           </div>
           <div class="input-group">
             <span class="input-group-addon">Password</span>
-            <input type="text" class="panel-body" id="password" placeholder="Entrez votre password" autofocus>
+            <input type="password" class="panel-body" id="password" placeholder="Entrez votre password" autofocus>
           </div>
 
 
@@ -126,35 +126,41 @@
     </div>
 
 
-      <div class="panel panel-default">
-        <div class="panel-heading" >
-          <h3 class="panel-title">Commentaires</h3>
-        </div>
-        <div id="comments" class="panel-body">
-
-        </div>
-      </div>
-
-  <div class="panel panel-default">
+    <div class="panel panel-default">
       <div class="panel-heading" >
-        <h3 class="panel-title">Commentaire add</h3>
+        <h3 class="panel-title">Commentaires</h3>
       </div>
-      <div id="comments-add" class="panel-body">
+      <div id="comments" class="panel-body">
+
       </div>
+
+      <div id="add-comments" class="panel-body">
+        <form>
+          <div class="input-group">
+            <span class="input-group-addon">Commentaire </span>
+            <input type="text" class="form-control" id="commentaire-area" placeholder="Entrez votre commentaire" autofocus>
+          </div>
+          <br />
+          <button type="submit" class="btn btn-success pull-right" id="chat-send">
+            <span class="glyphicon glyphicon-send"></span> Commenter
+          </button>
+        </form>
+      </div>
+    </div>
+
   </div>
-</div>
 
 
-    <!-- Timestamp div -->
+  <!-- Timestamp div -->
 
 
 
 
-    <!-- Js Scripts -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/ajax.js"></script>
-    <script src="js/loading.js"></script>
-    <script src="js/auth.js"></script>
-  </body>
-  </html>
+  <!-- Js Scripts -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/ajax.js"></script>
+  <script src="js/loading.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

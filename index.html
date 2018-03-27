@@ -48,65 +48,60 @@
         </form>
       </div>
     </div>
-  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--=======================================================================-->
-
-
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">chat</h3>
       </div>
-      <div class="modal-body">
-        ...
+      <div id="chat" class="panel-body">
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <div class="panel-body">
+        <form>
+          <textarea class="form-control" rows="10" id="chat-room" readonly></textarea>
+          <div class="input-group">
+            <span class="input-group-addon">Message </span>
+            <input type="text" class="form-control" id="chat-message" placeholder="Entrez votre message" autofocus>
+          </div>
+          <br />
+          <button type="submit" class="btn btn-success pull-right" id="chat-send">
+            <span class="glyphicon glyphicon-send"></span> Envoyer
+          </button>
+        </form>
       </div>
     </div>
   </div>
-</div>
+
+
+  <!--=======================================================================-->
 
 
 
+  <!-- Button trigger modal -->
 
 
-<!--=======================================================================-->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--=======================================================================-->
 
 
 
@@ -127,16 +122,6 @@
       </div>
       <div id="photo2" class="panel-body">
 
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading" >
-          <h3 class="panel-title">chat</h3>
-        </div>
-        <div id="chat" class="panel-body">
-        </div>
       </div>
     </div>
 

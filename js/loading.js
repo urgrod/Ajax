@@ -1,6 +1,16 @@
 'use strict';
 
+var login = 'cir2';
+
 ajaxRequest('GET','php/request.php/photos/',displayPhotos);
+
+
+
+
+
+
+
+
 
 function displayPhotos(responseText){
   var data=JSON.parse(responseText);
@@ -26,43 +36,60 @@ function displayPhotos(responseText){
       event.preventDefault();
       var id=event.target.id.substr(6);
       ajaxRequest('GET','php/request.php/photos/'+id,loadPhoto);
-      ajaxRequest('Get','php/request.php/comments/'+id,loadComments);
+      ajaxRequest('GET','php/request.php/comments/'+id,loadComments);
     });
     document.getElementById("thumbnails").appendChild(div);
+
+
+
   }
+
+
+
+
+/*  $('#comment-sent').off('click').click(function (event)
+  {
+
+    event.preventDefault();
+      var id=event.target.id.substr(6);
+    ajaxRequest('POST', 'php/request.php/comments/'+id, function ()
+    {
+      ajaxRequest('GET', 'php/request.php/comments/'+id, loadComments);
+    }, '&text=' + $('#add-commentaire-area').val());
+  });
+
+
+
+
+
+*/
 };
 
-function loadPhoto(responseText){
+function loadPhoto(responseText)
+{
   console.log(responseText);
   var data=JSON.parse(responseText);
-  //var div= document.createElement("div");
-  //div.className="panel panel-default";
-  //div.hinnerHTML='<div class="panel-body"><h2>'+data[i].title+'</h2><div class="row"><div class="col-xs-12 col-md-12"><a href="#" class="thumbnail"><img src="'+data[i].src+'"></a></div></div></div>';
-  //document.getElementById("photo").appendChild(div);
   var text="<a href='#' class='thumbnail'><img id="+"photo-"+data[0].id+" src="+data[0].src+"></a>";
-
-  console.log(data[0].id);
+//  console.log(data[0].id);
   $('#photo2').html(text);
   $('#photo').attr('photoid', data[0].id);
 }
 
-function loadComments(responseText){
+function loadComments(responseText)
+{
   console.log(responseText);
   var data=JSON.parse(responseText);
-  //var div= document.createElement("div");
-  //div.className="panel panel-default";
-  //div.hinnerHTML='<div class="panel-body"><h2>'+data[i].title+'</h2><div class="row"><div class="col-xs-12 col-md-12"><a href="#" class="thumbnail"><img src="'+data[i].src+'"></a></div></div></div>';
-  //document.getElementById("photo").appendChild(div);
-
-  for (var i = 0; i < data.length; i++) {
-    var div= document.createElement("div");
+  $('#comments').html('');
+  for (var i = 0; i < data.length; i++)
+  {
+    var div = document.createElement("div");
     div.className="input-group";
-    var text ="  <div class="+"input-group"+"><span class="+"input-group-addon"+">"+data[i].userLogin+" </span><p  class="+"form-control"+" id="+"commentaire-area >"+data[i].comment+"</p></div>";
+    var text ="  <span class="+"input-group-addon"+">"+data[i].userLogin+" </span><p  class="+"form-control"+" id="+"commentaire-area >"+data[i].comment+"</p>";
+    //console.log(data[i].photoId);
     console.log(data[i].comment);
     div.innerHTML = text;
-
     document.getElementById("comments").appendChild(div);
+
   }
 
-  //$('#photo').attr('photoid', data[0].id);
 }

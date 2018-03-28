@@ -9,10 +9,20 @@ $requestType = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
 $request = explode('/', $request);
 $requestRessource = array_shift($request);
+<<<<<<< HEAD
 $id = array_shift($request);
 if($id == '')
 $id = NUll;
 $data = false;
+=======
+
+$id = array_shift($request);
+
+if($id == '')
+$id = NUll;
+$data = false;
+
+>>>>>>> 39de272c1de970e5e34d98e9ca3709a172d59ce6
 if ($requestRessource == 'photos'){
   if($id!=NULL) {
     $data = dbRequestPhoto($db,intval($id));
@@ -21,6 +31,10 @@ if ($requestRessource == 'photos'){
     $data = dbRequestPhotos($db);
   }
 }else if ($requestRessource == 'comments') {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 39de272c1de970e5e34d98e9ca3709a172d59ce6
   if ($requestType == 'GET') {
     $data = dbRequestComments($db,$id);
   }
@@ -35,6 +49,11 @@ if ($requestRessource == 'photos'){
     $data = dbDeleteComments($db, intval($id),$_GET['login']);
   }*/
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 39de272c1de970e5e34d98e9ca3709a172d59ce6
 header('Content-Type: text/plain;charset=utf-8');
 header('Cache-control: no-store,no-cache,must-revalidate');
 header('Pragma:no-cache');

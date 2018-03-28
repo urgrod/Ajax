@@ -40,7 +40,7 @@
             <span class="input-group-addon">Password</span>
             <input type="password" class="panel-body" id="password" placeholder="Entrez votre password">
           </div>
-        <br/>
+          <br/>
           <button type="submit" class="btn btn-success pull-right" id="authentification-send">
             <span class="glyphicon glyphicon-send"></span> Connexion
           </button>
@@ -61,7 +61,7 @@
             <span class="input-group-addon">Message </span>
             <input type="text" class="form-control" id="chat-message" placeholder="Entrez votre message">
           </div>
-        <br/>
+          <br/>
           <button type="submit" class="btn btn-success pull-right" id="chat-send">
             <span class="glyphicon glyphicon-send"></span> Envoyer
           </button>
@@ -103,10 +103,15 @@
           <span class="input-group-addon">Pseudo </span>
           <p class="form-control" id="commentaire-area"></p>
         </div>
+
+        <button type="button" class="btn btn-danger">
+          <span class="glyphicon glyphicon-remove"></span> Supprimer
+        </button>
+
       </div>
 
       <div id="add-comments" class="panel-body">
-        <form>
+        <form method="post" id="add-commentaire-area-form">
           <div class="input-group">
             <span class="input-group-addon">Commentaire </span>
             <input type="text" class="form-control" id="add-commentaire-area" placeholder="Entrez votre commentaire">

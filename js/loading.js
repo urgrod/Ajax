@@ -2,7 +2,8 @@
 
 ajaxRequest('GET','php/request.php/photos/',displayPhotos);
 
-function displayPhotos(responseText){
+function displayPhotos(responseText)
+{
   var data=JSON.parse(responseText);
   for(var i=0;i<data.length;i++){
     /*var div=document.getElementById("div");
@@ -26,13 +27,17 @@ function displayPhotos(responseText){
       event.preventDefault();
       var id=event.target.id.substr(6);
       ajaxRequest('GET','php/request.php/photos/'+id,loadPhoto);
-      ajaxRequest('Get','php/request.php/comments/'+id,loadComments);
+      // ajaxRequest('Get','php/request.php/comments/'+id,loadComments);
+      ajaxRequest('Get','php/request.php/comments/'+id,sendComments);
+      // $.cookie('current-id') = id;
+
     });
     document.getElementById("thumbnails").appendChild(div);
   }
-};
+}
 
-function loadPhoto(responseText){
+function loadPhoto(responseText)
+{
   console.log(responseText);
   var data=JSON.parse(responseText);
   //var div= document.createElement("div");
@@ -46,7 +51,8 @@ function loadPhoto(responseText){
   $('#photo').attr('photoid', data[0].id);
 }
 
-function loadComments(responseText){
+function loadComments(responseText)
+{
   console.log(responseText);
   var data=JSON.parse(responseText);
   //var div= document.createElement("div");
@@ -63,6 +69,29 @@ function loadComments(responseText){
 
     document.getElementById("comments").appendChild(div);
   }
+}
 
-  //$('#photo').attr('photoid', data[0].id);
+
+function sendComments(responseText)
+{
+  $('#comment-send').click(function() {
+
+    var commentaire = $('#add-commentaire-area').val();
+
+    var cookieLogin = $.cookie('login');
+    var cookieId = $.cookie('current-id');
+
+    console.log(commentaire);
+
+
+    if (typeof cookieLogin == 'undefined' && typeof cookieId == 'undefined') {
+      cookieLogin ='';
+      cookieId ='';
+    }
+
+    ajaxRequest('POST', 'php/request.php/comments', loadComments, 'commentaire=' + commentaire + "&id_image=" + cookieId);
+
+
+    $('#commentaire-area').val('');
+  });
 }

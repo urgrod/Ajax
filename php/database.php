@@ -96,15 +96,16 @@
   }
 
 
-  function dbAddComments($db, $id, $text,$login)
+  function dbAddComments($db, $userLogin, $photoId,$comment)
 {
   try
   {
 
-    $request = 'INSERT INTO comments (id, userLogin, photoId, comment) VALUES (NULL, :login, :id, :text);';
+    $request = 'INSERT INTO comments (userLogin, photoId, comment) VALUES ( :login, :id, :comment);';
     $statement = $db->prepare($request);
-    $statement->bindParam(':login', $login, PDO::PARAM_STR, 20);
-    $statement->bindParam(':text', $text, PDO::PARAM_STR, 256);
+    $statement->bindParam(':userLogin', $userlogin, PDO::PARAM_STR, 20);
+    $statement->bindParam(':photoId', $photoId, PDO::PARAM_STR, 256);
+    $statement->bindParam(':comment', $comment, PDO::PARAM_STR, 256);
     $statement->execute();
   }
   catch (PDOException $exception)

@@ -36,3 +36,17 @@ $requestRessource = array_shift($request);
   header('HTTP/1.1 200 OK');
   echo json_encode($data);
   exit;
+
+
+  function auth(){
+    $login = $_SERVER['PHP_AUTH_USER'];
+    $password = $_SERVER['PHP-AUTH-PW'];
+
+    $request = $db->query("SELECT password FROM users WHERE login = '$login'");
+
+    if($password == $request){
+      echo "ok";
+    }else {
+      echo "nop";
+    }
+  }

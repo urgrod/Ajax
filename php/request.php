@@ -35,16 +35,12 @@ if ($requestRessource == 'photos'){
     $data = dbRequestComments($db,$id);
   }
   if ($requestType == "POST"){
-
     $data = dbAddComment($db,'cir2',$_POST['photoId'],$_POST['text']);
   }
-  /*if ($requestType == 'PUT'){
-    parse_str(file_get_contents('php://input'),$_PUT);
-    $data = dbModifyComments($db,intval($id),$_PUT['login'],$_PUT['text']);
+  if($requestType == 'DELETE'){
+
+    $data = dbDeleteComment($db, $_GET['login'], intval($id));
   }
-  if ($requestType == 'DELETE'){
-    $data = dbDeleteComments($db, intval($id),$_GET['login']);
-  }*/
 }
 
 

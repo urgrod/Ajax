@@ -28,7 +28,7 @@ function displayPhotos(responseText)
       var id=event.target.id.substr(6);
       ajaxRequest('GET','php/request.php/photos/'+id,loadPhoto);
       // ajaxRequest('Get','php/request.php/comments/'+id,loadComments);
-      ajaxRequest('Get','php/request.php/comments/'+id,sendComments);
+      ajaxRequest('Get','php/request.php/comments/'+id,dbAddComments);
       // $.cookie('current-id') = id;
 
     });

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <!-- Meta tags -->
+  <meta charset="utf-8" />
+  <meta name="author" content="???" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Title -->
+  <title>Projet Photo</title>
+
+  <!-- Css Styles -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <!-- Header -->
+  <div class="page-header container" id="test">
+    <h1>Projet <small>AJAX</small></h1>
+  </div>
+
+  <!-- Errors div -->
+
+  <div id="errors" class="container">
+
+  </div>
+
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Authentification</h3>
+      </div>
+      <div id="authentification" class="panel-body">
+        <form>
+          <div class="input-group">
+            <span class="input-group-addon">Login</span>
+            <input type="text" class="panel-body" id="login" placeholder="Entrez votre login" autofocus>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">Password</span>
+            <input type="password" class="panel-body" id="password" placeholder="Entrez votre password">
+          </div>
+          <br/>
+          <button type="submit" class="btn btn-success pull-right" id="authentification-send">
+            <span class="glyphicon glyphicon-send"></span> Connexion
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Chat</h3>
+      </div>
+      <div id="chat" class="panel-body">
+      </div>
+      <div class="panel-body">
+        <form>
+          <textarea class="form-control" rows="10" id="chat-room" readonly></textarea>
+          <div class="input-group">
+            <span class="input-group-addon">Message </span>
+            <input type="text" class="form-control" id="chat-message" placeholder="Entrez votre message">
+          </div>
+          <br/>
+          <button type="submit" class="btn btn-success pull-right" id="chat-send">
+            <span class="glyphicon glyphicon-send"></span> Envoyer
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!--=======================================================================-->
+
+  <div class="col-md-8">
+
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Gallerie</h3>
+      </div>
+      <div id="thumbnails" class="panel-body">
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Photo</h3>
+      </div>
+      <div id="photo2" class="panel-body">
+
+      </div>
+    </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Commentaires</h3>
+      </div>
+
+      <div id="comments" class="panel-body">
+        <div class="input-group">
+          <span class="input-group-addon">Pseudo </span>
+          <p class="form-control" id="commentaire-area"></p>
+        </div>
+
+        <button type="button" class="btn btn-danger">
+          <span class="glyphicon glyphicon-remove"></span> Supprimer
+        </button>
+
+      </div>
+
+      <div id="add-comments" class="panel-body">
+        <form method="post" id="add-commentaire-area-form">
+          <input type="hidden" name="login-commentaire" id="login-commentaire"/>
+          <input type="hidden" name="id_photo" id="id_photo"/>
+          <div class="input-group">
+            <span class="input-group-addon">Commentaire </span>
+            <input type="text" class="form-control" id="add-commentaire-area" placeholder="Entrez votre commentaire">
+          </div>
+          <br />
+          <button type="submit" class="btn btn-success pull-right" id="comment-send">
+            <span class="glyphicon glyphicon-send"></span> Commenter
+          </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Timestamp div -->
+
+
+
+
+  <!-- Js Scripts -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/ajax.js"></script>
+  <script src="js/loading.js"></script>
+  <script src="js/auth.js"></script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
  * @Company: ISEN Yncréa Ouest
  * @Email: thibault.napoleon@isen-ouest.yncrea.fr
  * @Created Date: 22-Jan-2018 - 13:57:23
- * @Last Modified: 29-Jan-2018 - 22:39:10
+ * @Last Modified: 20-Feb-2018 - 23:14:32
  */
 
   require_once('constants.php');
@@ -77,11 +77,18 @@
     return $result;
   }
 
+  //----------------------------------------------------------------------------
+  //--- dbRequestComments ------------------------------------------------------
+  //----------------------------------------------------------------------------
+  // Get all comments of a specific photo.
+  // \param db The connected database.
+  // \param photoId The id of the photo.
+  // \return The comments.
   function dbRequestComments($db, $photoId)
   {
     try
     {
-      $request = 'SELECT id, comment, userLogin FROM comments where photoId=:photoId';
+      $request = 'select id,userLogin, comment from comments where photoId=:photoId';
       $statement = $db->prepare($request);
       $statement->bindParam(':photoId', $photoId, PDO::PARAM_INT);
       $statement->execute();
@@ -95,78 +102,184 @@
     return $result;
   }
 
+  //----------------------------------------------------------------------------
+  //--- dbAddComment -----------------------------------------------------------
+  //----------------------------------------------------------------------------
+  // Add a comment to a specific photo.
+  // \param db The connected database.
+  // \param userLogin The login of the user.
+  // \param photoId The id of the photo.
+  // \param comment The comment to add.
+  // \return True on success, false otherwise.
+  function dbAddComment($db, $userLogin, $photoId, $comment)
+  {
+    try
+    {
+      $request = '
+        insert into comments(userLogin, photoId, comment)
+        values(:userLogin, :photoId, :comment)';
+      $statement = $db->prepare($request);
+      $statement->bindParam(':userLogin', $userLogin, PDO::PARAM_STR, 20);
+      $statement->bindParam(':photoId', $photoId, PDO::PARAM_INT);
+      $statement->bindParam(':comment', $comment, PDO::PARAM_STR, 256);
+      $statement->execute();
+    }
+    catch (PDOException $exception)
+    {
+      error_log('Request error: '.$exception->getMessage());
+      return false;
+    }
+    return true;
+  }
 
-  function dbAddComments($db, $userLogin, $photoId,$comment)
-{
-  try
+  //----------------------------------------------------------------------------
+  //--- dbModifyComment --------------------------------------------------------
+  //----------------------------------------------------------------------------
+  // Modify a comment from a specific photo.
+  // \param db The connected database.
+  // \param userLogin The login of the user.
+  // \param photoId The id of the photo.
+  // \param comment The modified comment.
+  // \return True on success, false otherwise.
+  function dbModifyComment($db, $userLogin, $photoId, $comment)
   {
+    return true;
+  }
 
-    $request = 'INSERT INTO comments (userLogin, photoId, comment) VALUES ( :login, :id, :comment);';
-    $statement = $db->prepare($request);
-    $statement->bindParam(':userLogin', $userlogin, PDO::PARAM_STR, 20);
-    $statement->bindParam(':photoId', $photoId, PDO::PARAM_STR, 256);
-    $statement->bindParam(':comment', $comment, PDO::PARAM_STR, 256);
-    $statement->execute();
-  }
-  catch (PDOException $exception)
+  //----------------------------------------------------------------------------
+  //--- dbDeleteComment --------------------------------------------------------
+  //----------------------------------------------------------------------------
+  // Delete a comment from a specific photo.
+  // \param db The connected database.
+  // \param userLogin The login of the user.
+  // \param id The id of the comment.
+  // \return True on success, false otherwise.
+  function dbDeleteComment($db, $userLogin, $id)
   {
-    error_log('Request error: '.$exception->getMessage());
-    return false;
+    try
+    {
+      $request = 'delete from comments where id=:id and
+        userLogin=:userLogin';
+      $statement = $db->prepare($request);
+      $statement->bindParam(':id', $id, PDO::PARAM_INT);
+      $statement->bindParam(':userLogin', $userLogin, PDO::PARAM_STR, 20);
+      $statement->execute();
+    }
+    catch (PDOException $exception)
+    {
+      error_log('Request error: '.$exception->getMessage());
+      return false;
+    }
+    return true;
   }
-  return true;
-}
 
-//----------------------------------------------------------------------------
-//--- dbModifyTwitt ----------------------------------------------------------
-//----------------------------------------------------------------------------
-// Function to modify a twitt.
-// \param db The connected database.
-// \param id The id of the twitt to update.
-// \param login The login of the user.
-// \param text The new twitt.
-// \return True on success, false otherwise.
-/*function dbModifyComments($db, $id, $login, $text)
-{
-  try
+  //----------------------------------------------------------------------------
+  //--- dbCheckUserInjection ---------------------------------------------------
+  //----------------------------------------------------------------------------
+  // Check login/password of a user with possible SQL injection.
+  // \param db The connected database.
+  // \param login The login to check.
+  // \param password The password to check.
+  // \return True on success, false otherwise.
+  function dbCheckUserInjection($db, $login, $password)
   {
-    $request = 'update twitts set text=:text where id=:id and login=:login ';
-    $statement = $db->prepare($request);
-    $statement->bindParam(':id', $id, PDO::PARAM_INT);
-    $statement->bindParam(':login', $login, PDO::PARAM_STR, 20);
-    $statement->bindParam(':text', $text, PDO::PARAM_STR, 80);
-    $statement->execute();
+    try
+    {
+      $statement = $db->query = 'select * from users where login='.$login.' and
+        password=sha1('.$password.')';
+      $result = $statement->fetch();
+    }
+    catch (PDOException $exception)
+    {
+      error_log('Request error: '.$exception->getMessage());
+      return false;
+    }
+    if (!$result)
+      return false;
+    return true;
   }
-  catch (PDOException $exception)
-  {
-    error_log('Request error: '.$exception->getMessage());
-    return false;
-  }
-  return true;
-}
 
-//----------------------------------------------------------------------------
-//--- dbDeleteTwitt ----------------------------------------------------------
-//----------------------------------------------------------------------------
-// Delete a twitt.
-// \param db The connected database.
-// \param id The id of the twitt.
-// \param login The login of the user.
-// \return True on success, false otherwise.
-function dbDeleteComments($db, $id, $login)
-{
-  try
+  //----------------------------------------------------------------------------
+  //--- dbCheckUser ------------------------------------------------------------
+  //----------------------------------------------------------------------------
+  // Check login/password of a user.
+  // \param db The connected database.
+  // \param login The login to check.
+  // \param password The password to check.
+  // \return True on success, false otherwise.
+  function dbCheckUser($db, $login, $password)
   {
-    $request = 'delete from twitts where id=:id and login=:login';
-    $statement = $db->prepare($request);
-    $statement->bindParam(':id', $id, PDO::PARAM_INT);
-    $statement->bindParam(':login', $login, PDO::PARAM_STR, 20);
-    $statement->execute();
+    try
+    {
+      $request = 'select * from users where login=:login and
+        password=sha1(:password)';
+      $statement = $db->prepare($request);
+      $statement->bindParam (':login', $login, PDO::PARAM_STR, 20);
+      $statement->bindParam (':password', $password, PDO::PARAM_STR, 40);
+      $statement->execute();
+      $result = $statement->fetch();
+    }
+    catch (PDOException $exception)
+    {
+      error_log('Request error: '.$exception->getMessage());
+      return false;
+    }
+    if (!$result)
+      return false;
+    return true;
   }
-  catch (PDOException $exception)
+
+  //----------------------------------------------------------------------------
+  //--- dbAddToken -------------------------------------------------------------
+  //----------------------------------------------------------------------------
+  // Add a token to the database.
+  // \param db The connected database.
+  // \param login The login assocciated with the token.
+  // \param token The token to add.
+  // \return True on success, false otherwise.
+  function dbAddToken($db, $login, $token)
   {
-    error_log('Request error: '.$exception->getMessage());
-    return false;
+    try
+    {
+      $request = '
+        update users set token=:token where login=:login';
+      $statement = $db->prepare($request);
+      $statement->bindParam(':login', $login, PDO::PARAM_STR, 20);
+      $statement->bindParam(':token', $token, PDO::PARAM_STR, 20);
+      $statement->execute();
+    }
+    catch (PDOException $exception)
+    {
+      error_log('Request error: '.$exception->getMessage());
+      return false;
+    }
+    return true;
   }
-  return true;
-}*/
+
+  //----------------------------------------------------------------------------
+  //--- dbVerifyToken ----------------------------------------------------------
+  //----------------------------------------------------------------------------
+  // Verify a user token.
+  // \param db The connected database.
+  // \param token The token to check.
+  // \return Login on success, false otherwise.
+  function dbVerifyToken($db, $token)
+  {
+    try
+    {
+      $request = 'select login from users where token=:token';
+      $statement = $db->prepare($request);
+      $statement->bindParam (':token', $token, PDO::PARAM_STR, 20);
+      $statement->execute();
+      $result = $statement->fetch();
+    }
+    catch (PDOException $exception)
+    {
+      error_log('Request error: '.$exception->getMessage());
+      return false;
+    }
+    if (!$result)
+      return false;
+    return $result['login'];
+  }
 ?>

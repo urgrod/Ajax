@@ -72,6 +72,10 @@
     }
     return $result;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf8cb142529fc153d1b35b284c135d3c4da3d76d
   function dbRequestComments($db, $photoId)
   {
     try
@@ -93,9 +97,15 @@
 
   function dbAddComments($db, $userLogin, $photoId,$comment)
 {
+<<<<<<< HEAD
   error_log($comment);
   try
   {
+=======
+  try
+  {
+
+>>>>>>> bf8cb142529fc153d1b35b284c135d3c4da3d76d
     $request = 'INSERT INTO comments (userLogin, photoId, comment) VALUES ( :login, :id, :comment);';
     $statement = $db->prepare($request);
     $statement->bindParam(':userLogin', $userlogin, PDO::PARAM_STR, 20);
@@ -110,6 +120,10 @@
   }
   return true;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf8cb142529fc153d1b35b284c135d3c4da3d76d
 //----------------------------------------------------------------------------
 //--- dbModifyTwitt ----------------------------------------------------------
 //----------------------------------------------------------------------------
@@ -119,7 +133,11 @@
 // \param login The login of the user.
 // \param text The new twitt.
 // \return True on success, false otherwise.
+<<<<<<< HEAD
 function dbModifyComments($db, $id, $login, $text)
+=======
+/*function dbModifyComments($db, $id, $login, $text)
+>>>>>>> bf8cb142529fc153d1b35b284c135d3c4da3d76d
 {
   try
   {
@@ -137,6 +155,10 @@ function dbModifyComments($db, $id, $login, $text)
   }
   return true;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> bf8cb142529fc153d1b35b284c135d3c4da3d76d
 //----------------------------------------------------------------------------
 //--- dbDeleteTwitt ----------------------------------------------------------
 //----------------------------------------------------------------------------
@@ -161,4 +183,9 @@ function dbDeleteComments($db, $id, $login)
     return false;
   }
   return true;
+<<<<<<< HEAD
 }
+=======
+}*/
+?>
+>>>>>>> bf8cb142529fc153d1b35b284c135d3c4da3d76d

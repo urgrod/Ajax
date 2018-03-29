@@ -1,9 +1,5 @@
 <?php
 
-//affichage du formulaire d'author
-
-//si auth ok --> index.html
-//si auth non ok --> on boucle avec infos comme quoi mdp ou login pas bon
 $error = '';
 $loginSaisi ='';
 $mdpSaisi = '';
@@ -11,46 +7,47 @@ $mdpSaisi = '';
 if(isset($_POST["login"]) && isset($_POST["password"])){
   include 'database.php';
 
-  dbConnect();
+  $loginSaisi = $_POST["login"];
+  $mdpSaisi = $_POST["password"];
 
-  try{
-    $loginSaisi = $_POST["login"];
-    $mdpSaisi = $_POST["password"];
+  $db = dbConnect();
 
-    $request = "SELECT password FROM users WHERE login =:loginSaisi"
-    $query = $db->prepare($request);
-    $query->bindParam(":loginSaisi", $id, PDO::PARAM_INT);
+  $request = "SELECT login,password FROM users WHERE login =:loginSaisi";
+  $statement = $db->prepare($request);
+  $statement->bindParam(":loginSaisi", $id, PDO::PARAM_INT);
 
-    $query->execute();
+  $statement->execute();
 
-    $row = $query->fetchAll(PDO::FETCH_ASSOC);
+  $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+  if($loginSaisi == $result["login"]){
 
     $mdpSaisiChiffre = sha1($mdpSaisi);
 
-    if($mdpSaisiChiffre == $row["password"]){
-      header('Location: /index.html');
+    if($mdpSaisiChiffre == $result["password"]){
+      header('Location: ../index_gallerie.html');
       exit();
     }
     else{
       $error .= '<div class="alert alert-danger">
       <strong>Erreur!</strong> Vous n\'avez pas saisis le bon mot de passe.
-      </div>'
+      </div>';
 
     }
   }
-  catch{
+  else{
     $error .= '<div class="alert alert-danger">
     <strong>Erreur!</strong> Vous n\'avez pas saisis le bon login.
-    </div>'
+    </div>';
 
   }
-}else{
-  $error .= '<div class="alert alert-danger">
-  <strong>Erreur!</strong> Vous n\'avez pas saisis de login ou de mot de passe.
-  </div>'
+  else{
+    $error .= '<div class="alert alert-danger">
+    <strong>Erreur!</strong> Vous n\'avez pas saisis de login ou de mot de passe.
+    </div>';
+  }
 }
 
 
 
-
-?>
+  ?>

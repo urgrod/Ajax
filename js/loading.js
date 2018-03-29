@@ -1,9 +1,11 @@
 'use strict';
 
+var login = 'cir2';
+
 ajaxRequest('GET','php/request.php/photos/',displayPhotos);
 
-function displayPhotos(responseText)
-{
+
+function displayPhotos(responseText){
   var data=JSON.parse(responseText);
   for(var i=0;i<data.length;i++){
     /*var div=document.getElementById("div");
@@ -27,71 +29,56 @@ function displayPhotos(responseText)
       event.preventDefault();
       var id=event.target.id.substr(6);
       ajaxRequest('GET','php/request.php/photos/'+id,loadPhoto);
-      // ajaxRequest('Get','php/request.php/comments/'+id,loadComments);
-      ajaxRequest('Get','php/request.php/comments/'+id,dbAddComments);
-      // $.cookie('current-id') = id;
-
+      ajaxRequest('GET','php/request.php/comments/'+id,loadComments);
     });
     document.getElementById("thumbnails").appendChild(div);
+
+
+
   }
-}
+};
+
+
+
+  $('#comment-send').unbind('click').click(function (event)
+  {
+    event.preventDefault();
+      var  photoId = $('#photo2 img').attr('photoid');
+    ajaxRequest('POST', 'php/request.php/comments/', function (val)
+    {
+      ajaxRequest('GET', 'php/request.php/comments/'+photoId, loadComments);
+    }, 'photoId='+ photoId + '&text= '+ $('#add-commentaire-area').val());
+    console.log("photod : " + photoId);
+      $('#add-commentaire-area').val('');
+  });
+
+
 
 function loadPhoto(responseText)
 {
   console.log(responseText);
   var data=JSON.parse(responseText);
-  //var div= document.createElement("div");
-  //div.className="panel panel-default";
-  //div.hinnerHTML='<div class="panel-body"><h2>'+data[i].title+'</h2><div class="row"><div class="col-xs-12 col-md-12"><a href="#" class="thumbnail"><img src="'+data[i].src+'"></a></div></div></div>';
-  //document.getElementById("photo").appendChild(div);
   var text="<a href='#' class='thumbnail'><img id="+"photo-"+data[0].id+" src="+data[0].src+"></a>";
-
-  console.log(data[0].id);
+//  console.log(data[0].id);
   $('#photo2').html(text);
-  $('#photo').attr('photoid', data[0].id);
+  $('#photo2 img').attr('photoid', data[0].id);
 }
 
 function loadComments(responseText)
 {
   console.log(responseText);
   var data=JSON.parse(responseText);
-  //var div= document.createElement("div");
-  //div.className="panel panel-default";
-  //div.hinnerHTML='<div class="panel-body"><h2>'+data[i].title+'</h2><div class="row"><div class="col-xs-12 col-md-12"><a href="#" class="thumbnail"><img src="'+data[i].src+'"></a></div></div></div>';
-  //document.getElementById("photo").appendChild(div);
-
-  for (var i = 0; i < data.length; i++) {
-    var div= document.createElement("div");
+  $('#comments').html('');
+  for (var i = 0; i < data.length; i++)
+  {
+    var div = document.createElement("div");
     div.className="input-group";
-    var text ="  <div class="+"input-group"+"><span class="+"input-group-addon"+">"+data[i].userLogin+" </span><p  class="+"form-control"+" id="+"commentaire-area >"+data[i].comment+"</p></div>";
-    console.log(data[i].comment);
+    var text ="  <span class="+"input-group-addon"+">"+data[i].userLogin+" </span><p  class="+"form-control"+" id="+"commentaire-area >"+data[i].comment+"</p>";
+    //console.log(data[i].photoId);
+    console.log(data[i].userLogin);
     div.innerHTML = text;
-
     document.getElementById("comments").appendChild(div);
+
   }
-}
 
-
-function sendComments(responseText)
-{
-  $('#comment-send').click(function() {
-
-    var commentaire = $('#add-commentaire-area').val();
-
-    var cookieLogin = $.cookie('login');
-    var cookieId = $.cookie('current-id');
-
-    console.log(commentaire);
-
-
-    if (typeof cookieLogin == 'undefined' && typeof cookieId == 'undefined') {
-      cookieLogin ='';
-      cookieId ='';
-    }
-
-    ajaxRequest('POST', 'php/request.php/comments', loadComments, 'commentaire=' + commentaire + "&id_image=" + cookieId);
-
-
-    $('#commentaire-area').val('');
-  });
 }

@@ -1,6 +1,21 @@
-'use strict'
+/**
+ * @Author: Thibault Napoléon <Imothep>
+ * @Company: ISEN Yncréa Ouest
+ * @Email: thibault.napoleon@isen-ouest.yncrea.fr
+ * @Created Date: 23-Jan-2018 - 17:00:53
+ * @Last Modified: 05-Feb-2018 - 23:14:39
+ */
 
+'use strict';
 
+//------------------------------------------------------------------------------
+//--- ajaxRequest --------------------------------------------------------------
+//------------------------------------------------------------------------------
+// Perform an Ajax request.
+// \param type The type of the request (GET, DELETE, POST, PUT).
+// \param request The request with the data.
+// \param callback The callback to call where the request is successful.
+// \param data The data associated with the request.
 function ajaxRequest(type, request, callback, data = null)
 {
   var xhr;
@@ -10,6 +25,7 @@ function ajaxRequest(type, request, callback, data = null)
   if (type == 'GET' && data != null)
     request += '?' + data;
   xhr.open(type, request, true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
   // Add the onload function.
   xhr.onload = function ()
@@ -30,40 +46,47 @@ function ajaxRequest(type, request, callback, data = null)
   xhr.send(data);
 }
 
-
-
-
-
+//------------------------------------------------------------------------------
+//--- httpErrors ---------------------------------------------------------------
+//------------------------------------------------------------------------------
+// Display a message corresponding to an Http error code.
+// \param errorNumber the error code.
 function httpErrors(errorNumber)
 {
-  switch (errorNumber) {
-    case 200:
-      $('#errors').html('OK : '+ errorNumber);
-      break;
-    case 201:
-    $('#errors').html('OK + Modification: '+ errorNumber);
-    break;
+  var text;
+
+  text = '<div class="alert alert-danger" role="alert">';
+  text += '<span class="glyphicon glyphicon-exclamation-sign"></span>';
+  switch (errorNumber)
+  {
     case 400:
-      $('#errors').html('  Bad Request ERROR : '+ errorNumber);
+      // Bad request.
+      text += '<strong> Requête incorrecte</strong>';
       break;
     case 401:
-      $('#errors').html('  Unauthorized ERROR : '+ errorNumber);
+      // Unauthorized.
+      text += '<strong> Authentifiez vous</strong>';
       break;
     case 403:
-      $('#errors').html(' Forbidden ERROR : '+ errorNumber);
+      // Forbidden.
+      text += '<strong> Accès refusé</strong>';
       break;
     case 404:
-      $('#errors').html(' Not Found ERROR : '+ errorNumber);
+      // Ressource not found.
+      text += '<strong> Page non trouvée</strong>';
       break;
     case 500:
-      $('#errors').html('  Internal Server Error ERROR : '+ errorNumber);
+      // Internal server error.
+      text += '<strong> Erreur interne du serveur</strong>';
       break;
-    case 401:
-      $('#errors').html('  Service Unavailable ERROR : '+ errorNumber);
+    case 503:
+      // Service unavailable.
+      text += '<strong> Service indisponible</strong>';
       break;
     default:
-
+      text += '<strong> HTTP erreur ' + errorNumber + '</strong>';
+      break;
   }
-
-  //console.log('ERROR : ' + errorNumber);
+  text += '</div>';
+  $('#errors').html(text);
 }

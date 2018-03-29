@@ -1,7 +1,10 @@
 'use strict';
 
+var url = document.location.href;
+
 var websocket;
-var login='xX_D4rk4ng3l_Xx';
+var login = url.substring(45);;
+
 
 createWebSocket();
 

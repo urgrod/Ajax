@@ -35,7 +35,8 @@ if(isset($_POST["login"]) && isset($_POST["password"])){
     $mdpSaisiChiffre = sha1($mdpSaisi);
 
     if($mdpSaisiChiffre == $result["password"]){
-      header('Location: ../index_gallerie.html');
+      header('Location: ../index_gallerie.html?login='.$loginSaisi.'');
+      setCookie("login", $loginSaisi);
       exit();
 
 

@@ -1,6 +1,3 @@
-
-console.log(document.location.href);
-
 var url = document.location.href;
 var error;
 

@@ -1,9 +1,9 @@
 'use strict';
 
 var url = document.location.href;
+var login = url.substring(45);;
 
 var websocket;
-var login = url.substring(45);;
 
 
 createWebSocket();

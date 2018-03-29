@@ -54,6 +54,7 @@ function displayPhotos(responseText){
 
 
 
+
 function loadPhoto(responseText)
 {
   console.log(responseText);
@@ -73,12 +74,27 @@ function loadComments(responseText)
   {
     var div = document.createElement("div");
     div.className="input-group";
-    var text ="  <span class="+"input-group-addon"+">"+data[i].userLogin+" </span><p  class="+"form-control"+" id="+"commentaire-area >"+data[i].comment+"</p>";
+    var text ="  <span class="+"input-group-addon"+">"+data[i].userLogin+" </span><p  class="+"form-control"+" id="+"commentaire-area >"+data[i].comment+" <button id =del"+data[i].id+" type="+"button"+" class="+"btn btn-danger pull-right"+"> Supprimer</button></p>";
     //console.log(data[i].photoId);
-    console.log(data[i].userLogin);
+    console.log(data[i].id+"==========================================================");
     div.innerHTML = text;
     document.getElementById("comments").appendChild(div);
+
+  $('#del'+data[i].id).unbind('click').click(function (event)
+    {
+      var id = event.target.id.substr(3);
+      console.log(id+'ooooooooooooooooooooooooooooooo'+login);
+        var photoId = $('#photo2 img').attr('photoid');
+      ajaxRequest('DELETE', 'php/request.php/comments/'+id +'?login=' + login, function ()
+      {
+        ajaxRequest('GET', 'php/request.php/comments/'+photoId, loadComments);
+      });
+        console.log(login+'qsdfghjklmlkjhgfdfghjklkjhgfdfghjkjhgfd');
+
+    });
 
   }
 
 }
+
+/*=======================================================*/

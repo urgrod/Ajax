@@ -65,8 +65,11 @@ function loadPhoto(responseText)
   var data=JSON.parse(responseText);
   var text="<a href='#' class='thumbnail'><img id="+"photo-"+data[0].id+" src="+data[0].src+"></a>";
 //  console.log(data[0].id);
+console.log(data[0].title);
   $('#photo2').html(text);
   $('#photo2 img').attr('photoid', data[0].id);
+   $('#photo-title').html(data[0].title);
+
 }
 
 function loadComments(responseText)

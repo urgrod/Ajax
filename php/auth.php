@@ -52,9 +52,6 @@ if(isset($_POST["login"]) && isset($_POST["password"])){
   }
   //fin if login saisi
   else{
-    $error .= '<div class="alert alert-danger">
-    <strong>Erreur!</strong> Vous n\'avez pas saisis le bon login.
-    </div>';
 
     header('Location: ../index.html?error=2');
 
@@ -62,9 +59,6 @@ if(isset($_POST["login"]) && isset($_POST["password"])){
   }//fin else login saisi
 }
 else{
-  $error .= '<div class="alert alert-danger">
-  <strong>Erreur!</strong> Vous n\'avez pas saisis de login ou de mot de passe.
-  </div>';
 
   header('Location: ../index.html?error=1');
 

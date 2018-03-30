@@ -1,3 +1,2 @@
 
-2- suppresion des commentaires
 3- utilisation des tokens pour l'authentification si le temps

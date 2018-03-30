@@ -1,10 +1,8 @@
 <?php
-
-$error = '';
 $loginSaisi ='';
 $mdpSaisi = '';
 
-if(isset($_POST["login"]) && isset($_POST["password"])){
+if(isset($_POST["login"]) || isset($_POST["password"])){
   include 'database.php';
 
   $loginSaisi = $_POST["login"];
@@ -41,12 +39,7 @@ if(isset($_POST["login"]) && isset($_POST["password"])){
 
 
     }
-    else{
-      $error .= '<div class="alert alert-danger">
-      <strong>Erreur!</strong> Vous n\'avez pas saisis le bon mot de passe.
-      </div>';
-
-      header('Location: ../index.html?error=3');
+    else{      header('Location: ../index.html?error=3');
 
 
     }//else mdp

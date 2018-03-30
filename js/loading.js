@@ -69,6 +69,9 @@ console.log(data[0].title);
   $('#photo2').html(text);
   $('#photo2 img').attr('photoid', data[0].id);
    $('#photo-title').html(data[0].title);
+   $('#panel-photo').css('visibility', 'visible');
+   $('#panel-add-comments').css('visibility', 'visible');
+
 
 }
 

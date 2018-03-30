@@ -86,7 +86,7 @@ function loadComments(responseText)
     div.className="input-group";
 
     var text ='<div class = "panel panel-default"><div class="panel-body">'+
-    data[i].userLogin + ":" +data[i].comment +
+    '<strong>'+ data[i].userLogin + "</strong>:" +data[i].comment +
     '&nbsp<a><span id=del' + data[i].id +
     ' class="glyphicon glyphicon-trash pull-right" aria-hidden="true"></a>' +
     '</div></div>';

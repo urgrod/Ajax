@@ -45,6 +45,33 @@
         </form>
       </div>
     </div>
+
+    <div class="panel panel-default" style="left: 50%;">
+      <div class="panel-heading" >
+        <h3 class="panel-title">Inscription</h3>
+      </div>
+      <div id="authentification" class="panel-body">
+        <form method="POST" action="php/inscription.php">
+          <div class="input-group">
+            <span class="input-group-addon">Login</span>
+            <input type="text" class="panel-body" name="login" placeholder="Entrez votre login" autofocus id="login">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">Password</span>
+            <input type="password" class="panel-body" name="password1" placeholder="Entrez votre password">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">Password</span>
+            <input type="password" class="panel-body" name="password2" placeholder="Retapez votre password">
+          </div>
+
+          <br/>
+          <button type="submit" class="btn btn-success pull-right" id="authentification-send">
+            <span class="glyphicon glyphicon-send"></span> Connexion
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 
 

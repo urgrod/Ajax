@@ -2,11 +2,14 @@
 $loginSaisi ='';
 $mdpSaisi = '';
 
+/*
+Verification si les champs ne sont pas vies, si les mots de passes sont identiques puis si le login existe bien en base
+*/
+
 if(isset($_POST["login"]) || isset($_POST["password"])){
   include 'database.php';
 
   $loginSaisi = $_POST["login"];
-  // var_dump($loginSaisi);
   $mdpSaisi = $_POST["password"];
   $longueur = '';
 
@@ -18,14 +21,12 @@ if(isset($_POST["login"]) || isset($_POST["password"])){
 
   $statement->execute();
 
-  // var_dump($statement);
 
 
   $result = $statement->fetch(PDO::FETCH_ASSOC);
 
   $longueur = sizeof($result);
 
-  // var_dump($result);
 
 
   if($loginSaisi == $result['login']){
@@ -34,17 +35,16 @@ if(isset($_POST["login"]) || isset($_POST["password"])){
 
     if($mdpSaisiChiffre == $result["password"]){
       header('Location: ../index_gallerie.html?login='.$loginSaisi.'');
-      // setCookie("login", $loginSaisi);
       exit();
 
 
     }
-    else{      header('Location: ../index.html?error=3');
+    else{
+      header('Location: ../index.html?error=3');
 
 
     }//else mdp
   }
-  //fin if login saisi
   else{
 
     header('Location: ../index.html?error=2');

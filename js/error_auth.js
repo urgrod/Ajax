@@ -1,6 +1,10 @@
 var url = document.location.href;
 var error;
 
+/*
+Affichage des erreurs selon le type d'erreur renvoye par le php
+*/
+
 if (url.indexOf("error=3") != -1) {
 
 

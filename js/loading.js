@@ -81,7 +81,8 @@ function loadComments(responseText)
   {
     var div = document.createElement("div");
     div.className="input-group";
-    var text ="  <span class="+"input-group-addon"+">"+data[i].userLogin+" </span><p  class="+"form-control"+" id="+"commentaire-area >"+data[i].comment+" <button id =del"+data[i].id+" type="+"button"+" class="+"btn btn-danger pull-right"+"> Supprimer</button></p>";
+    var text ="  <span class="+"input-group-addon"+">"+data[i].userLogin+" </span><p  class="+"form-control"+" id="+"commentaire-area >"+data[i].comment+" <button id =del"+data[i].id+" type="+"button"+" class="+"btn btn-danger pull-right"+"><span class="+"glyphicon glyphicon-trash"+" aria-hidden="+"true"+">suppresion</span>
+</button></p>";
     //console.log(data[i].photoId);
     console.log(data[i].id+"==========================================================");
     div.innerHTML = text;

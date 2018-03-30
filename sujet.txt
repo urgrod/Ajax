@@ -1,2 +1,0 @@
-
-3- utilisation des tokens pour l'authentification si le temps

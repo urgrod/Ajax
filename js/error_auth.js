@@ -3,6 +3,9 @@ var error;
 
 /*
 Affichage des erreurs selon le type d'erreur renvoye par le php
+code d'erreur 3 -> pas de login ou mot de passe de saisis
+code d'erreur 2 -> saisis d'un mauvais login
+code d'erreur 1 -> saisis d'un mauvais mot de passe
 */
 
 if (url.indexOf("error=3") != -1) {

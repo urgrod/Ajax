@@ -15,19 +15,24 @@ $id = NUll;
 $data = false;
 if ($requestRessource == 'photos'){
   if($id!=NULL) {
+    //affichage d'une photo
     $data = dbRequestPhoto($db,intval($id));
   }
   else {
+    //affichage de toutes les photos
     $data = dbRequestPhotos($db);
   }
 }else if ($requestRessource == 'comments') {
   if ($requestType == 'GET') {
+    //affichage de tout les commentaires liees a cette photo
     $data = dbRequestComments($db,$id);
   }
   if ($requestType == "POST"){
+    //ajout d'un commentaire saisi par l'utilisateur en base de donnees
     $data = dbAddComment($db,'cir2',$_POST['photoId'],$_POST['text']);
   }
   if($requestType == 'DELETE'){
+    //suppression d'un commentaire en base de donnees par un utilisateur
     $data = dbDeleteComment($db, $_GET['login'], intval($id));
   }
 }

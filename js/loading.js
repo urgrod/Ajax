@@ -6,6 +6,10 @@ var login = url.substring(45);;
 
 ajaxRequest('GET','php/request.php/photos/',displayPhotos);
 
+/*
+  fonction permettant d'afficher la gallerie photo complete
+  parametre entree: - reponse du serveur
+*/
 
 function displayPhotos(responseText){
   var data=JSON.parse(responseText);
@@ -39,7 +43,7 @@ function displayPhotos(responseText){
 };
 
 
-
+//permet d'ajouter les commentaires en base lors du click du bouton d'envoi
 $('#comment-send').unbind('click').click(function (event)
 {
   event.preventDefault();
@@ -53,7 +57,12 @@ $('#comment-send').unbind('click').click(function (event)
 
 
 
+/*
+fonction permettant permettant de charger une photo selon son id
+affiche le panel du zoom de la photo ainsi que le panel d'ajout et de visualisation des commentaires lors du click sur une photo dans la gallerie
+parametre d'entree: -reponse du serveur
 
+*/
 function loadPhoto(responseText)
 {
   var data=JSON.parse(responseText);
@@ -66,6 +75,11 @@ function loadPhoto(responseText)
 
 
 }
+
+/*
+fonction permettant de charger les commentaires lies a la photo
+parametre d'entree: -reponse du serveur
+*/
 
 function loadComments(responseText)
 {

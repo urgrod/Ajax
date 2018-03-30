@@ -3,18 +3,25 @@ $loginSaisi ='';
 $mdpSaisi = '';
 
 /*
-Verification si les champs ne sont pas vies, si les mots de passes sont identiques puis si le login existe bien en base
+Verification si les champs ne sont pas vides, si les mots de passes sont identiques puis si le login existe bien en base
+
+Recuperation du login et mot de passe en POST
+verification de la validite des champs obtenus
+comparaison avec la base de donnes du login et du password
+redirection soit vers la page d'authentification soit vers la gallerie photo
 */
 
+//Verification que les champs ne sont pas vides
 if(isset($_POST["login"]) || isset($_POST["password"])){
   include 'database.php';
 
   $loginSaisi = $_POST["login"];
   $mdpSaisi = $_POST["password"];
-  $longueur = '';
 
+//creation de la connexion a la base de donnees
   $db = dbConnect();
 
+//requete permettant de recuperer le login et le mot de passe dont le login correspond a celui saisi par l'utilisateur
   $request = "SELECT login,password FROM users WHERE login = :loginSaisi";
   $statement = $db->prepare($request);
   $statement->bindParam(":loginSaisi", $loginSaisi, PDO::PARAM_INT);
@@ -25,35 +32,33 @@ if(isset($_POST["login"]) || isset($_POST["password"])){
 
   $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-  $longueur = sizeof($result);
-
-
-
   if($loginSaisi == $result['login']){
 
     $mdpSaisiChiffre = sha1($mdpSaisi);
 
     if($mdpSaisiChiffre == $result["password"]){
+      //redirection vers la page contenant les images si l'authentification est correcte + ajout du login de l'utilisateur dans l'url
       header('Location: ../index_gallerie.html?login='.$loginSaisi.'');
       exit();
 
 
     }
     else{
+      //redirection vers la page d'authentification avec comme code d'erreur 3 qui correspond a un mauvais mot de passe
       header('Location: ../index.html?error=3');
 
 
     }//else mdp
   }
   else{
-
+    //redirection vers la page d'authentification avec comme code d'erreur 2 qui correspond a un mauvais login
     header('Location: ../index.html?error=2');
 
 
   }//fin else login saisi
 }
 else{
-
+  //redirection vers la page d'authentification avec comme code d'erreur 1 qui correspond a des champs vides
   header('Location: ../index.html?error=1');
 
 }//fin else verif post

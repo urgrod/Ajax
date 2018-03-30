@@ -1,5 +1,11 @@
 'use strict';
 
+/*Script permettant de creer la websocket vers le serveur de chat
+genere un bouton qui envoie le message lors du click
+affiche le message dans une textArea lors de la reception
+
+*/
+
 var url = document.location.href;
 var login = url.substring(45);;
 
